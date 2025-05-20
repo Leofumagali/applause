@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/events")
@@ -36,8 +37,15 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@Valid @RequestBody Event event) {
-        Event saved = eventService.createOrUpdateEvent(event);
+        Event saved = eventService.createEvent(event);
         return ResponseEntity.ok(saved);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+        return eventService.updateEvent(id, updates)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
