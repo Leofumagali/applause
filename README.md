@@ -7,13 +7,15 @@
 ## 🚀 Tech Stack
 
 ### Frontend
-- [Next.js](https://nextjs.org/)
-- [React](https://reactjs.org/)
-- [TailwindCSS](https://tailwindcss.com/)
+<p align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="40" alt="Next.js"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40" alt="React"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="40" alt="TailwindCSS"/>
+</p>
 
 ### Backend
-- [Java](https://www.oracle.com/java/) with [Spring Boot](https://spring.io/projects/spring-boot)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Spring Security + JWT](https://spring.io/projects/spring-security)
-- OAuth2 authentication with Google and Facebook
-- [Mercado Pago](https://www.mercadopago.com.br/) for payments (PIX support)
+<p align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="40" alt="Java"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="40" alt="Spring Boot"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="40" alt="PostgreSQL"/>
+</p>
