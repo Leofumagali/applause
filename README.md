@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎟️ Applause
 
 **Applause** is a modern ticketing platform for events. Inspired by creativity, freedom, and diversity, the project pays tribute to pop culture with a clean, minimalist design and a solid, scalable architecture.
@@ -17,3 +18,4 @@
 - [Spring Security + JWT](https://spring.io/projects/spring-security)
 - OAuth2 authentication with Google and Facebook
 - [Mercado Pago](https://www.mercadopago.com.br/) for payments (PIX support)
+=======
