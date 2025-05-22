@@ -1,6 +1,10 @@
 package com.applause.backend.repository;
 
+import com.applause.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-//public interface UserRepository extends JpaRepository<User> {
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
+}

@@ -1,4 +1,3 @@
-/*
 package com.applause.backend.model;
 
 import jakarta.persistence.Embeddable;
@@ -6,24 +5,24 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class Password {
 
-    private String salt;
-    private String hashPassword;
 
-    public Password(){}
+    private String hash;
 
-    public Password(String salt, String hashPassword) {
-        this.salt = salt;
-        this.hashPassword = hashPassword;
+    public Password() {
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public Password( String hash) {
+
+        this.hash = hash;
     }
 
-    public String getHashPassword() {return hashPassword;}
+    public String getHash() {
+        return hash;
+    }
 
-    public void setHashPassword(String hashPassword) {
-        this.hashPassword = hashPassword;
+    public void setHash(String hashPassword) {
+        this.hash = hashPassword;
     }
 }
-*/
+
+
