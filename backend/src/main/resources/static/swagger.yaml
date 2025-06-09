@@ -1,0 +1,196 @@
+openapi: 3.0.3
+info:
+  title: Auth API - Applause
+  version: 1.0.0
+  description: Authentication endpoints for Applause. Includes user registration, login, logout, and authenticated user info.
+
+servers:
+  - url: /
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              firstName: Leo
+              lastName: Fumagali
+              email: leo@example.com
+              password: 12345678
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Validation error
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              email: leo@example.com
+              password: 12345678
+      responses:
+        '200':
+          description: Successful login, returns JWT token and user data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+              example:
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                user:
+                  id: "1"
+                  firstName: Leo
+                  lastName: Fumagali
+                  email: leo@example.com
+                  role: admin
+                  avatarUrl: https://cdn.applause.app/avatars/leo.jpg
+                  createdAt: "2025-06-09T12:00:00Z"
+                  updatedAt: "2025-06-09T12:30:00Z"
+                  tickets:
+                    - id: "t1"
+                      eventId: "e123"
+                      eventTitle: "Lady Gaga Live"
+                      seat: "A12"
+                      price: 249.99
+                      status: valid
+                      createdAt: "2025-06-01T10:00:00Z"
+        '401':
+          description: Invalid credentials
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Log out the current user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully logged out
+        '401':
+          description: Unauthorized
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Return authenticated user data
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [firstName, lastName, email, password]
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [user, admin]
+        avatarUrl:
+          type: string
+          format: uri
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        tickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticket'
+
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+        eventId:
+          type: string
+        eventTitle:
+          type: string
+        seat:
+          type: string
+        price:
+          type: number
+          format: float
+        status:
+          type: string
+          enum: [valid, used, cancelled]
+        createdAt:
+          type: string
+          format: date-time
