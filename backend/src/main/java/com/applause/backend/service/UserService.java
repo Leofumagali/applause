@@ -5,7 +5,9 @@ import com.applause.backend.model.User;
 import com.applause.backend.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,8 +36,19 @@ public class UserService {
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isEmpty()) return false;
 
-        String storedHash = userOptional.get().getPassword().getHash();
+        String storedHash = userOptional.get().getPassword();
         return passwordEncoder.matches(rawPassword, storedHash);
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
 }
